@@ -34,7 +34,7 @@ public class SignActivity extends AppCompatActivity {
         btnSignIn =findViewById(R.id.btnSignIn);
 
         database = FirebaseDatabase.getInstance();
-        final DatabaseReference table_user = database.getReference("user");
+        final DatabaseReference table_user = database.getReference("User");
 
 
 
