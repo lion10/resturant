@@ -1,23 +1,19 @@
 package com.omar1998lol.andorideatit;
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.View;
-import android.widget.TextView;
-import android.widget.Toast;
-
-import com.firebase.ui.database.FirebaseIndexRecyclerAdapter;
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.omar1998lol.andorideatit.Interface.ItemClickListener;
-import com.omar1998lol.andorideatit.Model.Category;
 import com.omar1998lol.andorideatit.Model.Food;
 import com.omar1998lol.andorideatit.ViewHolder.FoodViewHolder;
-import com.omar1998lol.andorideatit.ViewHolder.MenuViewHolder;
+
 import com.squareup.picasso.Picasso;
 
 public class Food_List extends AppCompatActivity {
@@ -56,17 +52,19 @@ public class Food_List extends AppCompatActivity {
                 foodList.orderByChild("MenuId").equalTo(categoryId) //like :select * from foods where MenuID =
                  ) {
             @Override
-            protected void populateViewHolder(FoodViewHolder viewHolder, Food model, int position) {
+            protected void populateViewHolder(FoodViewHolder viewHolder, Food model, final int position) {
                 viewHolder.food_name.setText(model.getName());
                 Picasso.with(getBaseContext()).load(model.getImage()).into(viewHolder.food_image);
                 final Food local = model;
                 viewHolder.setItemClickListener(new ItemClickListener() {
                     @Override
                     public void onClick(View view, int postion, boolean isLongClick) {
-                        Toast.makeText(Food_List.this,""+local.getName(),Toast.LENGTH_LONG).show();
+                        //start new activity
+                        Intent foodDeteil = new Intent(Food_List.this,FoodDetail.class);
+                        foodDeteil.putExtra("FoodId",adapter.getRef(position).getKey()); // send food id to new activity
+                        startActivity(foodDeteil);
                     }
                 });
-
 
             }
         };
