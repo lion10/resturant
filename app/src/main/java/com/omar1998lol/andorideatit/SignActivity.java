@@ -57,7 +57,7 @@ public class SignActivity extends AppCompatActivity {
                         // Get User Information
                             mDialog.dismiss();
                             User user = dataSnapshot.child(edtPhone.getText().toString()).getValue(User.class);
-
+                            user.setPhone(edtPhone.getText().toString());//set Phone
                             if (user.getPassword().equals(edtPassword.getText().toString()))
                             {
                                 Intent intent = new Intent(SignActivity.this,Home.class);

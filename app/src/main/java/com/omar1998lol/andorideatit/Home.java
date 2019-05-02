@@ -57,8 +57,8 @@ public class Home extends AppCompatActivity
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
+                Intent intent = new Intent(Home.this,Cart.class);
+                startActivity(intent);
             }
         });
 
@@ -150,11 +150,15 @@ public class Home extends AppCompatActivity
         if (id == R.id.nav_menu) {
             // Handle the camera action
         } else if (id == R.id.nav_cart) {
-
+                Intent cartIntent = new Intent(Home.this,Cart.class);
+                startActivity(cartIntent);
         } else if (id == R.id.nav_orders) {
-
+            Intent cartIntent = new Intent(Home.this,OrderStatus.class);
+            startActivity(cartIntent);
         } else if (id == R.id.nav_log_out) {
-
+            Intent signIn = new Intent(Home.this,SignActivity.class);
+            signIn.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK| Intent.FLAG_ACTIVITY_CLEAR_TASK);
+            startActivity(signIn);
         }
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
